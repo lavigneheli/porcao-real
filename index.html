@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Porção Real | protótipo</title>
+<style>
+:root{--red:#d9202e;--ink:#1d1b1a;--mut:#7a726d;--bg:#faf6f1;--card:#fff;--ok:#1f9d55}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#e9e2da;font-family:'Segoe UI',system-ui,sans-serif;color:var(--ink);display:flex;justify-content:center;padding:18px}
+.phone{width:390px;height:790px;background:var(--bg);border-radius:34px;border:8px solid #1d1b1a;position:relative;overflow:hidden;display:flex;flex-direction:column}
+header{padding:16px 18px 8px}header small{color:var(--mut)}header h1{margin:2px 0 0;font-size:20px}
+.tabs{display:flex;margin:0 18px 8px;background:#efe7de;border-radius:12px;padding:3px}
+.tabs button{flex:1;border:0;background:none;padding:8px;border-radius:10px;font-weight:600;color:var(--mut);font-size:13px}
+.tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px #0002}
+.screen{flex:1;overflow:auto;padding:4px 18px 18px;display:none}.screen.on{display:block}
+.hint{font-size:12px;color:var(--mut);margin:0 0 10px;display:flex;gap:6px;align-items:center}
+.dish{display:flex;gap:12px;background:var(--card);border-radius:16px;padding:10px;margin-bottom:10px;box-shadow:0 1px 4px #0001;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:pan-y;transition:transform .15s}
+.dish.press{transform:scale(.96)}
+.thumb{width:84px;height:84px;border-radius:12px;background:#f3e6d6;display:grid;place-items:center;flex:none;pointer-events:none}
+.dish h3{margin:2px 0;font-size:15px}.dish p{margin:0;font-size:12px;color:var(--mut)}.price{margin-top:8px;font-weight:700;font-size:14px}
+.badge{display:inline-block;font-size:11px;background:#e7f6ee;color:var(--ok);padding:2px 7px;border-radius:8px;margin-top:4px;font-weight:600}
+/* peek */
+#veil{position:absolute;inset:0;background:#0007;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .2s;display:grid;place-items:center;z-index:9}
+#veil.on{opacity:1}
+#peek{width:330px;background:#fff;border-radius:22px;overflow:hidden;transform:scale(.8);opacity:0;transition:transform .28s cubic-bezier(.2,1.4,.4,1),opacity .2s;box-shadow:0 20px 50px #0006}
+#veil.on #peek{transform:scale(1);opacity:1}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 6px}.ph b{font-size:15px}.ph small{color:var(--mut);display:block}
+.live{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;display:flex;gap:5px;align-items:center}
+.live i{width:6px;height:6px;border-radius:50%;background:#fff;animation:pl 1s infinite}@keyframes pl{50%{opacity:.2}}
+#stage{position:relative;height:230px;margin:0 10px;border-radius:14px;background:
+ linear-gradient(#0000 calc(100% - 1px),#0000000d 0) 0 0/100% 20px,linear-gradient(90deg,#0000 calc(100% - 1px),#0000000d 0) 0 0/20px 100%,#f6efe7;overflow:hidden}
+#stage .obj{position:absolute;bottom:14px;transition:all .5s}
+#dishwrap{animation:breathe 3s ease-in-out infinite}@keyframes breathe{50%{transform:translateY(-3px) scale(1.012)}}
+.steam{position:absolute;width:6px;height:22px;border-radius:6px;background:#fff9;filter:blur(3px);animation:st 2.4s infinite}
+@keyframes st{0%{transform:translateY(0);opacity:0}30%{opacity:.8}100%{transform:translateY(-34px);opacity:0}}
+#reflabel{position:absolute;top:8px;left:10px;font-size:11px;background:#1d1b1acc;color:#fff;padding:3px 8px;border-radius:8px}
+#scale{position:absolute;top:8px;right:10px;font-size:11px;color:var(--mut)}
+.dim{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px 4px}.dim span{background:#f3ece4;border-radius:9px;padding:4px 9px;font-size:12px;font-weight:600}
+.pm{padding:2px 14px 14px;font-size:12px;color:var(--mut)}.pm b{color:var(--ok)}
+/* rating */
+.q{background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px #0001}
+.q h4{margin:0 0 10px;font-size:14px}.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{flex:1;min-width:70px;border:1.5px solid #e4dbd1;background:#fff;border-radius:12px;padding:10px 6px;font-size:13px;font-weight:600;text-align:center}
+.opt.sel{border-color:var(--red);background:#fdeaec;color:var(--red)}
+.opt.m.sel{border-color:var(--ok);background:#e7f6ee;color:var(--ok)}
+textarea{width:100%;border:1.5px solid #e4dbd1;border-radius:12px;padding:10px;font:inherit;font-size:13px;resize:none;height:64px}
+.send{width:100%;border:0;background:var(--red);color:#fff;font-weight:700;padding:13px;border-radius:14px;font-size:15px;margin-top:4px}
+.send:disabled{background:#d8cfc6}
+.done{text-align:center;padding:40px 10px}.done h2{margin:6px 0}
+.deck{height:380px;display:grid;place-items:center;position:relative;touch-action:none}
+.swc{width:290px;height:350px;background:#fff;border-radius:26px;box-shadow:0 10px 30px #0002;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;cursor:grab;user-select:none;position:relative;touch-action:none}
+.swc h2{margin:14px 0 6px;font-size:22px}.swc p{margin:0;color:var(--mut);font-size:12px}
+.wink{width:120px;height:120px}.wink .face{animation:fc 2.4s infinite}.wink .eye2{transform-origin:67px 44px;animation:wk 2.4s infinite}
+@keyframes fc{0%,45%{fill:#d9202e}50%,95%{fill:#1f9d55}100%{fill:#d9202e}}
+@keyframes wk{0%,40%,60%,90%,100%{transform:scaleY(1)}50%,55%{transform:scaleY(.15)}}
+.lbl{position:absolute;top:22px;font-size:20px;font-weight:800;border:3px solid;border-radius:10px;padding:2px 10px;opacity:0}
+.lbl.yes{left:18px;color:var(--ok);transform:rotate(-12deg)}.lbl.no{right:18px;color:var(--red);transform:rotate(12deg)}
+.sbtns{display:flex;justify-content:center;gap:30px;margin-top:6px}
+.sb{width:58px;height:58px;border-radius:50%;border:0;background:#fff;box-shadow:0 3px 10px #0002;font-size:24px;font-weight:700}
+.sb.yes{color:var(--ok)}.sb.no{color:var(--red)}.done .wink{width:90px;height:90px}
+.sum{background:#fff;border-radius:16px;padding:12px;margin-top:14px;font-size:12px;color:var(--mut)}
+.sum b{color:var(--ink)}
+</style></head><body>
+<div class="phone">
+ <header><small>Brasa &amp; Pão (restaurante fictício)</small><h1>Cardápio</h1></header>
+ <div class="tabs"><button class="on" data-t="menu">Cardápio</button><button data-t="rate">Match do pedido</button></div>
+
+ <section class="screen on" id="menu">
+  <p class="hint">👆 Toque e segure um prato para ver o tamanho real</p>
+  <div id="list"></div>
+ </section>
+
+ <section class="screen" id="rate"><div id="ratebox"></div></section>
+
+ <div id="veil"><div id="peek">
+  <div class="ph"><div><b id="pn"></b><small id="pr"></small></div><span class="live"><i></i>AO VIVO</span></div>
+  <div id="stage"><div id="reflabel"></div><div id="scale"></div><div id="refobj" class="obj"></div><div id="dishwrap" class="obj"></div></div>
+  <div class="dim" id="pd"></div><div class="pm" id="pp"></div>
+ </div></div>
+</div>
+
+<script>
+/* Configure para gravar no Supabase (use a chave "anon/publishable", nunca a service role) */
+const SUPABASE_URL='https://xibkfsbveaulplhcnaqz.supabase.co', SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpYmtmc2J2ZWF1bHBsaGNuYXF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ3MDM5NjQsImV4cCI6MjExMDI3OTk2NH0.bykqDMpaC6UrjrpdB5QnMa2hDOnwMed4SNgk8k5iO0g';
+async function salvar(row){
+ if(!SUPABASE_URL||!SUPABASE_KEY) return 'modo demonstração (nada foi salvo)';
+ const r=await fetch(SUPABASE_URL+'/rest/v1/avaliacoes',{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(row)});
+ return r.ok?'salvo no banco':'erro ao salvar ('+r.status+')';
+}
+</script>
+<script>
+const $=s=>document.querySelector(s);
+/* dimensões em cm; desenho em unidades de mm (viewBox = cm*10) */
+const DISHES=[
+ {id:'smash',n:'Smash Burger Duplo',d:'Pão brioche, 2 carnes, cheddar',pr:'R$ 32,90',w:12,h:12,alt:'6,5 cm de altura',g:'260 g',serve:'1 pessoa com fome',match:82,aval:47,
+  svg:`<svg viewBox="0 0 120 120"><circle cx="60" cy="64" r="56" fill="#0002"/><circle cx="60" cy="60" r="56" fill="#d79a4b"/><circle cx="60" cy="60" r="56" fill="url(#g1)"/><defs><radialGradient id="g1" cx=".35" cy=".3"><stop offset="0" stop-color="#f3c37a"/><stop offset="1" stop-color="#b9772e"/></radialGradient></defs>${[[40,35],[62,28],[82,40],[30,60],[55,52],[78,62],[44,80],[68,84],[90,76],[50,68]].map(p=>`<ellipse cx="${p[0]}" cy="${p[1]}" rx="4" ry="2.2" fill="#fff4d6" transform="rotate(${p[0]*3} ${p[0]} ${p[1]})"/>`).join('')}</svg>`},
+ {id:'pizza',n:'Pizza Calabresa Média',d:'8 fatias, mussarela e calabresa',pr:'R$ 54,00',w:30,h:30,alt:'4 cm de espessura',g:'750 g',serve:'2 a 3 pessoas',match:64,aval:112,
+  svg:`<svg viewBox="0 0 300 300"><circle cx="150" cy="156" r="146" fill="#0002"/><circle cx="150" cy="150" r="146" fill="#d9a35c"/><circle cx="150" cy="150" r="128" fill="#c8362b"/><circle cx="150" cy="150" r="124" fill="#f2c94c"/>${[[0,0],[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]].map(i=>{const a=i[0]*Math.PI/4;return `<line x1="150" y1="150" x2="${150+146*Math.cos(a)}" y2="${150+146*Math.sin(a)}" stroke="#a8742f" stroke-width="2"/>`}).join('')}${[[100,100],[185,95],[210,150],[170,200],[110,190],[90,145],[150,140],[140,70],[205,205],[70,200]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="17" fill="#a42a22"/><circle cx="${p[0]-4}" cy="${p[1]-3}" r="3" fill="#d4584a"/>`).join('')}</svg>`},
+ {id:'batata',n:'Porção de Batata Frita',d:'Cesta com cheddar e bacon',pr:'R$ 26,50',w:18,h:12,alt:'cesta 18 × 12 cm',g:'400 g',serve:'2 pessoas',match:91,aval:73,
+  svg:`<svg viewBox="0 0 180 120"><rect x="2" y="8" width="176" height="110" rx="10" fill="#0002"/><rect x="0" y="4" width="176" height="110" rx="10" fill="#c9302c"/>${Array.from({length:34},(_,i)=>`<rect x="${10+(i*37)%150}" y="${10+(i*23)%85}" width="7" height="${28+(i*5)%16}" rx="3" fill="#f2c04c" transform="rotate(${(i*29)%80-40} ${14+(i*37)%150} ${24+(i*23)%85})"/>`).join('')}<path d="M30 40 Q90 20 150 50 Q110 70 60 62Z" fill="#f4a21d" opacity=".85"/></svg>`},
+ {id:'acai',n:'Açaí 500 ml',d:'Banana, granola e leite em pó',pr:'R$ 21,00',w:10,h:12,alt:'copo 10 × 12 cm',g:'500 ml',serve:'1 pessoa',match:88,aval:58,
+  svg:`<svg viewBox="0 0 100 120"><path d="M12 40 L88 40 L78 116 L22 116Z" fill="#6b2d8c"/><path d="M12 40 L88 40 L86 52 L14 52Z" fill="#4a1d66"/><ellipse cx="50" cy="38" rx="42" ry="14" fill="#7c3a9e"/>${[[30,32],[48,28],[66,33]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="8" fill="#f5e08a" stroke="#d8bd5e"/>`).join('')}${[[40,40],[56,37],[72,41],[24,38]].map(p=>`<rect x="${p[0]}" y="${p[1]}" width="6" height="3" rx="1.5" fill="#c58a3d"/>`).join('')}</svg>`}
+];
+const REFS=[
+ {n:'Celular',w:7.1,h:14.7,svg:`<svg viewBox="0 0 71 147"><rect width="71" height="147" rx="11" fill="#222"/><rect x="4" y="4" width="63" height="139" rx="8" fill="#9ec7ea"/><rect x="26" y="8" width="19" height="5" rx="2.5" fill="#222"/></svg>`},
+ {n:'Palma da mão',w:8.5,h:18,svg:`<svg viewBox="0 0 85 180"><g fill="#e9b996"><rect x="6" y="80" width="73" height="95" rx="30"/><rect x="6" y="14" width="14" height="80" rx="7"/><rect x="24" y="2" width="14" height="92" rx="7"/><rect x="42" y="0" width="14" height="94" rx="7"/><rect x="60" y="12" width="14" height="82" rx="7"/></g></svg>`},
+ {n:'Moeda de R$ 1',w:2.7,h:2.7,svg:`<svg viewBox="0 0 27 27"><circle cx="13.5" cy="13.5" r="13.5" fill="#c9a24b"/><circle cx="13.5" cy="13.5" r="9" fill="#d9b86a"/></svg>`}
+];
+/* lista */
+$('#list').innerHTML=DISHES.map(d=>`<div class="dish" data-id="${d.id}"><div class="thumb"><div style="width:62px;height:62px;display:grid;place-items:center">${d.svg.replace('<svg','<svg style="max-width:62px;max-height:62px"')}</div></div><div><h3>${d.n}</h3><p>${d.d}</p><span class="badge">${d.serve}</span><div class="price">${d.pr}</div></div></div>`).join('');
+
+/* peek: toque e segure */
+let timer=null,open=false,ri=0,cyc=null,sx=0,sy=0;
+function draw(d){
+ const r=REFS[ri],W=310,H=230;
+ const s=Math.min((W-36)/(d.w+r.w+1.5),(H-34)/Math.max(d.h,r.h));
+ const dw=$('#dishwrap'),ro=$('#refobj');
+ dw.style.width=d.w*s+'px';dw.style.height=d.h*s+'px';dw.innerHTML=d.svg.replace('<svg','<svg width="100%" height="100%" preserveAspectRatio="none"')+(d.id==='smash'||d.id==='batata'?[0,1,2].map(i=>`<span class="steam" style="left:${30+i*22}%;top:4%;animation-delay:${i*.7}s"></span>`).join(''):'');
+ ro.style.width=r.w*s+'px';ro.style.height=r.h*s+'px';ro.innerHTML=r.svg.replace('<svg','<svg width="100%" height="100%"');
+ const total=(d.w+r.w+1.5)*s,left=(W-total)/2+10;
+ dw.style.left=left+'px';ro.style.left=(left+(d.w+1.5)*s)+'px';
+ $('#reflabel').textContent='Comparado com: '+r.n;
+ $('#scale').textContent='escala relativa 1:'+(Math.round(100/s*10)/10).toString().replace('.',',');
+}
+function show(d){
+ open=true;$('#pn').textContent=d.n;$('#pr').textContent='Brasa & Pão · transmissão de exemplo';
+ $('#pd').innerHTML=`<span>Ø ${d.w} cm</span><span>${d.alt}</span><span>${d.g}</span><span>serve ${d.serve}</span>`;
+ $('#pp').innerHTML=`Match de porção: <b>${d.match}%</b> de ${d.aval} avaliações disseram que a porção serviu.`;
+ ri=0;draw(d);$('#veil').classList.add('on');
+ cyc=setInterval(()=>{ri=(ri+1)%REFS.length;draw(d)},1800);
+ if(navigator.vibrate)navigator.vibrate(15);
+}
+function hide(){clearTimeout(timer);clearInterval(cyc);open=false;$('#veil').classList.remove('on');document.querySelectorAll('.dish').forEach(e=>e.classList.remove('press'))}
+$('#list').addEventListener('pointerdown',e=>{
+ const c=e.target.closest('.dish');if(!c)return;sx=e.clientX;sy=e.clientY;c.classList.add('press');
+ timer=setTimeout(()=>show(DISHES.find(x=>x.id===c.dataset.id)),380);
+});
+addEventListener('pointermove',e=>{if(!open&&timer&&Math.hypot(e.clientX-sx,e.clientY-sy)>9)hide()});
+['pointerup','pointercancel'].forEach(t=>addEventListener(t,hide));
+addEventListener('contextmenu',e=>e.preventDefault());
+
+/* abas */
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===b.dataset.t));
+});
+
+/* avaliação match / não match: arrastar */
+const QS=[['comeu_bem','Você comeu bem?'],['serviu','A porção serviu pra você?'],['dividir','Dava pra dividir com mais alguém?']];
+let A={},qi=0;
+const WINK=`<svg viewBox="0 0 100 100" class="wink"><circle cx="50" cy="50" r="46" class="face"/><circle cx="34" cy="42" r="7" fill="#fff"/><path class="eye2" d="M58 44 Q67 35 76 44" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 64 Q50 82 70 64" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/></svg>`;
+function rate(){
+ qi=0;A={};card();
+}
+function card(){
+ if(qi>=QS.length)return comentario();
+ $('#ratebox').innerHTML=`<p class="hint">Smash Burger Duplo · pergunta ${qi+1} de ${QS.length}</p>
+ <div class="deck"><div class="swc" id="swc"><div class="lbl no">NÃO</div><div class="lbl yes">SIM</div>${WINK}<h2>${QS[qi][1]}</h2><p>Arraste para a direita (sim) ou esquerda (não)</p></div></div>
+ <div class="sbtns"><button class="sb no" onclick="fly(-1)">✕</button><button class="sb yes" onclick="fly(1)">✓</button></div>`;
+ const c=$('#swc');let x0=null,dx=0;
+ c.addEventListener('pointerdown',e=>{x0=e.clientX;c.setPointerCapture(e.pointerId);c.style.transition='none'});
+ c.addEventListener('pointermove',e=>{if(x0==null)return;dx=e.clientX-x0;pos(c,dx)});
+ const end=()=>{if(x0==null)return;x0=null;c.style.transition='transform .3s';if(Math.abs(dx)>90)fly(dx>0?1:-1);else{pos(c,0);dx=0}};
+ c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);
+}
+function pos(c,dx){c.style.transform=`translateX(${dx}px) rotate(${dx/14}deg)`;c.dataset.dir=dx>25?'yes':dx<-25?'no':'';
+ c.querySelector('.yes').style.opacity=Math.max(0,Math.min(1,dx/90));c.querySelector('.no').style.opacity=Math.max(0,Math.min(1,-dx/90))}
+function fly(d){const c=$('#swc');if(!c)return;c.style.transition='transform .3s,opacity .3s';c.style.transform=`translateX(${d*420}px) rotate(${d*25}deg)`;c.style.opacity=0;
+ A[QS[qi][0]]=d>0?'sim':'não';qi++;setTimeout(card,260)}
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')fly(1);if(e.key==='ArrowLeft')fly(-1)});
+function comentario(){
+ $('#ratebox').innerHTML=`<div class="q"><h4>Quer comentar? (opcional)</h4><textarea id="cm" placeholder="Conte o que achou..."></textarea></div><button class="send" onclick="enviar()">Enviar avaliação</button>`}
+async function enviar(){
+ const row={prato_id:'smash',comeu_bem:A.comeu_bem==='sim',serviu:A.serviu==='sim',dividir:A.dividir==='sim',comentario:$('#cm').value||null,simulado:false};
+ const st=await salvar(row);
+ $('#ratebox').innerHTML=`<div class="done">${WINK}<h2>Deu match!</h2><p style="color:var(--mut);font-size:13px">Obrigada pela avaliação. Ela ajuda o restaurante a ajustar a porção.</p></div>
+ <div class="sum"><b>O que vai para a automação (${st}):</b><pre style="white-space:pre-wrap;font-size:11px;margin:6px 0 0">${JSON.stringify(row,null,1)}</pre><br>Toda semana, o fluxo agrupa as respostas, a IA resume os padrões e sugere o novo "serve X pessoas" do prato.</div>
+ <button class="send" style="margin-top:12px;background:#1d1b1a" onclick="rate()">Refazer</button>`}
+rate();
+</script></body></html>
