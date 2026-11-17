@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relatório semanal | Brasa & Pão · Porção Real</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#EA1D2C;--ink:#1d1717;--mut:#7a6a62;--cream:#fff8f1;--pink:#ffe1de;--yel:#ffe8b3;--beige:#f5ece3;--ok:#16a34a;--warn:#f59e0b;--bad:#ef4444;--line:#f1d9cc}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;
+ background-image:radial-gradient(900px 480px at 12% -8%,#ffd9d3 0,transparent 60%),radial-gradient(700px 420px at 100% 4%,#ffe8b3aa 0,transparent 55%)}
+.wrap{max-width:1120px;margin:0 auto;padding:22px 20px 70px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em}
+.brand i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#EA1D2C,#ff6a3d);display:inline-block;box-shadow:0 10px 22px -10px #EA1D2C}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--mut)}
+.pill b{color:var(--ink)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px #16a34a22}
+.hero{margin-top:46px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+h1{font-size:clamp(38px,6.4vw,76px);line-height:.98;letter-spacing:-.045em;font-weight:800;margin:14px 0 16px}
+h1 em{font-style:normal;background:linear-gradient(100deg,#EA1D2C,#ff7a3d);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:18px;line-height:1.6;color:#5a4b44;max-width:620px}
+.board{margin-top:34px;background:var(--ink);color:#fff;border-radius:34px;padding:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative;overflow:hidden;box-shadow:0 40px 80px -40px rgba(29,23,23,.7)}
+.board:before{content:"";position:absolute;width:420px;height:420px;right:-120px;top:-200px;background:radial-gradient(circle,#EA1D2Caa,transparent 65%)}
+.kpi{position:relative}
+.kpi small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#d8c9c1}
+.kpi b{display:block;font-size:clamp(40px,6vw,66px);letter-spacing:-.05em;font-weight:800;line-height:1.05;margin-top:6px;background:linear-gradient(100deg,#fff,#ffc9c4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi span{font-size:13px;color:#cdbdb4}
+.sec{margin-top:52px;display:flex;align-items:end;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.sec h2{font-size:26px;letter-spacing:-.03em;font-weight:800}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:99px;padding:9px 16px;cursor:pointer;transition:.2s}
+.chips button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:32px;padding:26px;box-shadow:0 24px 50px -34px rgba(29,23,23,.45);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;opacity:0;transform:translateY(22px)}
+.card.in{opacity:1;transform:none}
+.card:hover{transform:translateY(-4px);box-shadow:0 34px 60px -30px rgba(234,29,44,.35)}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.top h3{font-size:22px;letter-spacing:-.035em;font-weight:800;line-height:1.1}
+.top small{display:block;color:var(--mut);font-size:12.5px;margin-top:5px;font-weight:500}
+.st{display:inline-flex;gap:7px;align-items:center;white-space:nowrap;background:var(--cream);border:1px solid var(--line);border-radius:99px;padding:7px 12px;font-size:12px;font-weight:700}
+.st i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.row{display:flex;gap:22px;align-items:center;margin-top:22px}
+.ring{position:relative;width:132px;height:132px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .c{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ring b{font-size:34px;letter-spacing:-.05em;font-weight:800;line-height:1}
+.ring b sup{font-size:15px;letter-spacing:0}
+.ring small{display:block;font-size:10.5px;color:var(--mut);font-weight:600;margin-top:3px}
+.bars{flex:1;display:grid;gap:14px}
+.bar label{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;margin-bottom:6px}
+.bar label span{color:var(--mut);font-weight:600}
+.track{height:10px;border-radius:99px;background:var(--beige);overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.blocks{display:grid;gap:10px;margin-top:22px}
+.blk{border-radius:22px;padding:16px 18px}
+.blk h4{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.blk p{font-size:14.5px;line-height:1.55;font-weight:500}
+.b-say{background:var(--beige)}.b-say h4{color:var(--mut)}
+.b-bad{background:var(--pink)}.b-bad h4{color:#b4232f}.b-bad p{color:#4c0a10;font-weight:600}
+.b-adj{background:var(--ink);color:#fff}.b-adj h4{color:#fff;display:inline-block;background:var(--red);padding:4px 10px;border-radius:99px}.b-adj p{font-weight:700}
+.b-str{background:var(--yel)}.b-str h4{color:#7a5a00}.b-str p{color:#3b2c00;font-weight:700}
+.foot-card{margin-top:34px;background:var(--pink);border-radius:34px;padding:34px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-card h3{font-size:26px;letter-spacing:-.035em;font-weight:800}
+.foot-card p{color:#6b4a47;font-size:15px;line-height:1.55;max-width:520px;margin-top:6px}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:15px;padding:16px 30px;border-radius:99px;box-shadow:0 16px 30px -14px #EA1D2C;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.legal{margin-top:30px;font-size:12.5px;line-height:1.7;color:var(--mut)}
+.legal a{color:var(--red);font-weight:700;text-decoration:none}
+.demo{display:none;margin-top:14px;background:var(--yel);border-radius:14px;padding:10px 14px;font-size:13px;font-weight:600;color:#6b4e00}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.board{grid-template-columns:1fr;padding:24px}.row{gap:16px}.ring{width:112px;height:112px}.ring svg{width:112px;height:112px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <nav>
+  <div class="brand"><i></i>Porção Real</div>
+  <div class="pill"><span class="dot"></span><b>Brasa &amp; Pão</b> · restaurante fictício · <span id="sem">semana</span></div>
+ </nav>
+
+ <header class="hero">
+  <div class="eyebrow">Relatório da semana</div>
+  <h1>Sua semana na <em>Brasa &amp; Pão</em></h1>
+  <p class="lead">Como os clientes avaliaram o tamanho de cada porção, o que reclamaram e o que a IA sugere ajustar. Nada muda no cardápio sem a sua aprovação.</p>
+  <div class="demo" id="demo">Modo demonstração: não foi possível ler o banco agora, então estes são dados de exemplo.</div>
+  <div class="board">
+   <div class="kpi"><small>Avaliações</small><b data-n id="k1">0</b><span>nos últimos 30 dias</span></div>
+   <div class="kpi"><small>Comeram bem</small><b data-n id="k2">0%</b><span>média dos pratos</span></div>
+   <div class="kpi"><small>Porção serviu</small><b data-n id="k3">0%</b><span>média dos pratos</span></div>
+  </div>
+ </header>
+
+ <div class="sec">
+  <h2>Pratos da semana</h2>
+  <div class="chips" id="chips"><button class="on" data-f="all">Todos</button><button data-f="dec">Precisam de decisão</button><button data-f="ok">Adequados</button></div>
+ </div>
+ <div class="grid" id="grid"></div>
+
+ <div class="foot-card">
+  <div><h3>Sua decisão</h3><p>Mude o status de cada sugestão para aprovada ou recusada no painel do restaurante.</p></div>
+  <a class="btn" href="https://supabase.com/dashboard/project/xibkfsbveaulplhcnaqz/editor">Revisar e aprovar</a>
+ </div>
+ <p class="legal">Enviado toda segunda-feira por uma automação no Make, com análise do Gemini. Dados fictícios. Projeto independente de Helen Lavigne Almeida Martins, sem vínculo com o iFood. <a href="https://github.com/lavigneheli/porcao-real">Código no GitHub</a> · <a href="./">Ver o protótipo</a></p>
+</div>
+
+<script>
+const URL_='https://xibkfsbveaulplhcnaqz.supabase.co',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpYmtmc2J2ZWF1bHBsaGNuYXF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ3MDM5NjQsImV4cCI6MjExMDI3OTk2NH0.bykqDMpaC6UrjrpdB5QnMa2hDOnwMed4SNgk8k5iO0g';
+const DEMO=[
+ {nome:'Pizza Calabresa Média',total:60,cb:87,sv:62,dv:58,res:'A pizza agrada (87% comeram bem), mas só 62% acharam a porção suficiente e 58% dividiram.',prob:'Fatias pequenas para o tamanho anunciado e pizza que chega fria.',adj:'Rotular como "serve 2 a 3 pessoas" e avaliar aumentar o tamanho médio.',est:'Oferecer frete grátis acima de R$ 60 e um combo "pizza + refrigerante" para dividir; avisar o tempo de preparo no app reduz a pizza fria.'},
+ {nome:'Açaí 500 ml',total:40,cb:90,sv:76,dv:10,res:'Boa aceitação (90%), mas 24% acharam a porção pequena.',prob:'Copo menor do que o esperado e pouca granola.',adj:'Testar um copo de 700 ml, mantendo o de 500 ml como padrão.',est:'Oferecer o copo de 700 ml como upgrade com cupom e granola extra no clube de assinatura.'},
+ {nome:'Smash Burger Duplo',total:55,cb:88,sv:84,dv:15,res:'88% comeram bem e 84% acharam a porção suficiente. Poucos dividiriam o prato.',prob:'Carne seca e pão murcho aparecem nas reclamações; a quantidade quase não é citada.',adj:'Manter a porção atual e monitorar: a nota está perto do limite de atenção.',est:'Manter a porção. Como o problema é qualidade na entrega, avisar "preparado na hora" e oferecer cupom de 10% no próximo pedido a quem avaliar mal.'},
+ {nome:'Porção de Batata Frita',total:45,cb:93.3,sv:88.9,dv:62.2,res:'93,3% comeram bem e 88,9% acharam a porção suficiente. 62,2% disseram que dava para dividir.',prob:'Batata chegando murcha e pouco cheddar.',adj:'Rotular o prato como "serve 2 pessoas".',est:'Destacar a batata em combo com hambúrguer no app e dar molho extra de cortesia.'}];
+const $=s=>document.querySelector(s),fmt=n=>String(Math.round(n*10)/10).replace('.',',');
+let DATA=[],demo=false;
+async function api(p){const r=await fetch(URL_+'/rest/v1/'+p,{headers:{apikey:KEY,Authorization:'Bearer '+KEY}});if(!r.ok)throw new Error(r.status);return r.json()}
+async function load(){
+ try{
+  if(location.search.includes('demo'))throw 0;
+  const [s,p]=await Promise.all([api('sugestoes?select=*&order=semana.desc,criado_em.desc&limit=60'),api('pratos?select=id,nome')]);
+  if(!s.length)throw 0;
+  const nm=Object.fromEntries(p.map(x=>[x.id,x.nome])),seen={},last=s[0].semana;
+  DATA=s.filter(x=>x.semana===last&&!seen[x.prato_id]&&(seen[x.prato_id]=1)).map(x=>({nome:nm[x.prato_id]||x.prato_id,total:x.total_avaliacoes||0,cb:+x.pct_comeu_bem,sv:+x.pct_serviu,dv:+x.pct_dividir,res:x.resumo_ia||'',prob:x.problemas||'',adj:x.sugestao_ia||'',est:x.estrategia||''}));
+  $('#sem').textContent='semana de '+last.split('-').reverse().join('/');
+ }catch(e){demo=true;DATA=DEMO;$('#demo').style.display='block';$('#sem').textContent='semana de exemplo'}
+ DATA.sort((a,b)=>a.sv-b.sv);render();kpis();
+}
+const tone=sv=>sv>=85?['Porção adequada','var(--ok)']:sv>=70?['Atenção','var(--warn)']:['Revisar porção','var(--bad)'];
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function bar(l,v,c){const b=el('div','bar');const lb=el('label');lb.append(el('span','',l),el('span','',fmt(v)+'%'));lb.firstChild.style.color='var(--ink)';lb.firstChild.style.fontWeight='700';
+ const t=el('div','track'),f=el('div','fill');f.style.background=c;f.dataset.w=v;t.append(f);b.append(lb,t);return b}
+function blk(c,h,t){if(!t)return null;const b=el('div','blk '+c);b.append(el('h4','',h),el('p','',t));return b}
+function render(){
+ const g=$('#grid');g.innerHTML='';
+ DATA.forEach(d=>{
+  const [lab,col]=tone(d.sv),card=el('article','card');card.dataset.k=d.sv<85?'dec':'ok';
+  const top=el('div','top'),l=el('div'),h=el('h3','',d.nome),sm=el('small','',d.total+' avaliações nos últimos 30 dias');l.append(h,sm);
+  const st=el('span','st');const i=el('i');i.style.background=col;st.append(i,lab);top.append(l,st);
+  const R=52,C=2*Math.PI*R;
+  const ring=el('div','ring');ring.innerHTML=`<svg width="132" height="132" viewBox="0 0 132 132"><circle cx="66" cy="66" r="${R}" fill="none" stroke="#f5ece3" stroke-width="12"/><circle class="arc" cx="66" cy="66" r="${R}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-t="${C*(1-d.sv/100)}" style="transition:stroke-dashoffset 1.3s cubic-bezier(.2,.8,.2,1)"/></svg><div class="c"><div><b>${fmt(d.sv)}<sup>%</sup></b><small>acharam que<br>serviu</small></div></div>`;
+  const bars=el('div','bars');bars.append(bar('Comeu bem',d.cb,'#EA1D2C'),bar('Dava pra dividir',d.dv,'#f5a524'));
+  const row=el('div','row');row.append(ring,bars);
+  const bl=el('div','blocks');[blk('b-say','O que os clientes dizem',d.res),blk('b-bad','Reclamações mais citadas',d.prob),blk('b-adj','Ajuste de porção',d.adj),blk('b-str','Estratégia sugerida',d.est)].forEach(x=>x&&bl.append(x));
+  card.append(top,row,bl);g.append(card);
+ });
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const c=e.target;c.classList.add('in');c.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%');const a=c.querySelector('.arc');if(a)a.style.strokeDashoffset=a.dataset.t;io.unobserve(c)}}),{threshold:.15});
+ document.querySelectorAll('.card').forEach(c=>io.observe(c));
+}
+function count(e,to,suf,dec){const t0=performance.now(),D=1300;(function f(t){const p=Math.min(1,(t-t0)/D),v=to*(1-Math.pow(1-p,3));e.textContent=(dec?fmt(v):Math.round(v))+suf;if(p<1)requestAnimationFrame(f)})(t0)}
+function kpis(){
+ const av=DATA.reduce((a,d)=>a+d.total,0),cb=DATA.reduce((a,d)=>a+d.cb,0)/DATA.length,sv=DATA.reduce((a,d)=>a+d.sv,0)/DATA.length;
+ count($('#k1'),av,'');count($('#k2'),Math.round(cb),'%');count($('#k3'),Math.round(sv),'%');
+}
+document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('#chips button').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.card').forEach(c=>c.style.display=(b.dataset.f==='all'||c.dataset.k===b.dataset.f)?'':'none')});
+load();
+</script>
+</body>
+</html>
