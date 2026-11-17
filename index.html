@@ -97,6 +97,22 @@ header h1{font-size:22px;letter-spacing:-.02em}
 .tabs{background:#f6ebe1}.tabs button.on{box-shadow:0 2px 8px #14110f1a}
 .send{background:linear-gradient(135deg,#f43f5e,#fb923c);box-shadow:0 10px 22px -10px #f43f5e}
 .badge{border-radius:99px;padding:3px 9px}
+/* match do pedido */
+.ord{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #f6ebe1;border-radius:16px;padding:10px 12px;margin:0 0 12px;box-shadow:0 8px 20px -16px rgba(20,17,15,.35)}
+.ord .th{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#fde4d6,#ffd1da);display:grid;place-items:center;font-size:22px;flex:none}
+.ord b{display:block;font-size:13.5px}.ord small{color:var(--mut);font-size:11.5px}
+.ord .st{margin-left:auto;font-size:11px;font-weight:700;color:#15803d;background:#e8f7ee;border-radius:99px;padding:3px 9px}
+.prog{display:flex;gap:6px;margin:0 0 10px}.prog i{flex:1;height:5px;border-radius:9px;background:#eadfd4}.prog i.on{background:linear-gradient(90deg,#f43f5e,#fb923c)}
+.deck{height:330px}.swc{height:310px;border:1px solid #f6ebe1;background:linear-gradient(180deg,#fff,#fff8f3);overflow:hidden}
+.swc .qn{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.swc h2{font-size:24px;line-height:1.15;letter-spacing:-.02em;margin:14px 0 8px}
+.edge{position:absolute;top:0;bottom:0;width:70px;opacity:0;pointer-events:none}
+.edge.yes{right:0;background:linear-gradient(270deg,rgba(22,163,74,.28),transparent)}
+.edge.no{left:0;background:linear-gradient(90deg,rgba(244,63,94,.28),transparent)}
+.sbtns{gap:34px}.sbw{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--mut)}
+.sb:active{transform:scale(.92)}
+.qc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.qc button{border:1px solid #eadfd4;background:#fff;border-radius:99px;padding:6px 11px;font-size:12px;font-weight:600;color:var(--ink)}.qc button.on{background:#14110f;color:#fff;border-color:#14110f}
+.ans{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.ans span{font-size:11.5px;font-weight:700;border-radius:99px;padding:4px 10px}.ans .s{background:#e8f7ee;color:#15803d}.ans .n{background:#fde8ec;color:#be123c}
 @media(max-width:980px){.steps{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.phone{width:100%;max-width:390px;margin:0 auto}}
 @media(min-width:981px){.wrap{display:flex;gap:64px;padding:56px 32px 40px;align-items:flex-start}.pres{flex:1 1 0;min-width:0}.stage{flex:0 0 406px;margin:0;position:sticky;top:28px}}
 </style></head><body>
@@ -223,6 +239,7 @@ addEventListener('contextmenu',e=>e.preventDefault());
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===b.dataset.t));
+ document.querySelector('.phone header h1').textContent=b.dataset.t==='rate'?'Match do pedido':'Cardápio';
 });
 
 /* avaliação match / não match: arrastar */
@@ -234,9 +251,11 @@ function rate(){
 }
 function card(){
  if(qi>=QS.length)return comentario();
- $('#ratebox').innerHTML=`<p class="hint">Smash Burger Duplo · pergunta ${qi+1} de ${QS.length}</p>
- <div class="deck"><div class="swc" id="swc"><div class="lbl no">NÃO</div><div class="lbl yes">SIM</div>${WINK}<h2>${QS[qi][1]}</h2><p>Arraste para a direita (sim) ou esquerda (não)</p></div></div>
- <div class="sbtns"><button class="sb no" onclick="fly(-1)">✕</button><button class="sb yes" onclick="fly(1)">✓</button></div>`;
+ const dots=QS.map((_,i)=>`<i class="${i<=qi?'on':''}"></i>`).join('');
+ $('#ratebox').innerHTML=`<div class="ord"><div class="th">🍔</div><div><b>Smash Burger Duplo</b><small>Brasa &amp; Pão · pedido entregue</small></div><span class="st">Entregue</span></div>
+ <div class="prog">${dots}</div>
+ <div class="deck"><div class="swc" id="swc"><div class="edge no"></div><div class="edge yes"></div><div class="lbl no">NÃO</div><div class="lbl yes">SIM</div><div class="qn">Pergunta ${qi+1} de ${QS.length}</div>${WINK}<h2>${QS[qi][1]}</h2><p>Arraste para a direita (sim) ou esquerda (não)</p></div></div>
+ <div class="sbtns"><div class="sbw"><button class="sb no" onclick="fly(-1)">✕</button>Não</div><div class="sbw"><button class="sb yes" onclick="fly(1)">✓</button>Sim</div></div>`;
  const c=$('#swc');let x0=null,dx=0;
  c.addEventListener('pointerdown',e=>{x0=e.clientX;c.setPointerCapture(e.pointerId);c.style.transition='none'});
  c.addEventListener('pointermove',e=>{if(x0==null)return;dx=e.clientX-x0;pos(c,dx)});
@@ -244,14 +263,22 @@ function card(){
  c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);
 }
 function pos(c,dx){c.style.transform=`translateX(${dx}px) rotate(${dx/14}deg)`;c.dataset.dir=dx>25?'yes':dx<-25?'no':'';
- c.querySelector('.yes').style.opacity=Math.max(0,Math.min(1,dx/90));c.querySelector('.no').style.opacity=Math.max(0,Math.min(1,-dx/90))}
+ const y=Math.max(0,Math.min(1,dx/90)),n=Math.max(0,Math.min(1,-dx/90));
+ c.querySelector('.lbl.yes').style.opacity=y;c.querySelector('.lbl.no').style.opacity=n;
+ c.querySelector('.edge.yes').style.opacity=y;c.querySelector('.edge.no').style.opacity=n}
 function fly(d){const c=$('#swc');if(!c)return;c.style.transition='transform .3s,opacity .3s';c.style.transform=`translateX(${d*420}px) rotate(${d*25}deg)`;c.style.opacity=0;
  A[QS[qi][0]]=d>0?'sim':'não';qi++;setTimeout(card,260)}
 addEventListener('keydown',e=>{if(e.key==='ArrowRight')fly(1);if(e.key==='ArrowLeft')fly(-1)});
 function comentario(){
- $('#ratebox').innerHTML=`<div class="q"><h4>Quer comentar? (opcional)</h4><textarea id="cm" placeholder="Conte o que achou..."></textarea></div><button class="send" onclick="enviar()">Enviar avaliação</button>`}
+ const ans=QS.map(q=>`<span class="${A[q[0]]==='sim'?'s':'n'}">${q[1].replace('?','')}: ${A[q[0]]}</span>`).join('');
+ const chips=['Porção pequena','Porção boa','Faltou molho','Chegou frio','Valeu o preço'].map(t=>`<button onclick="this.classList.toggle('on')">${t}</button>`).join('');
+ $('#ratebox').innerHTML=`<div class="ord"><div class="th">🍔</div><div><b>Quase lá</b><small>Só falta um comentário (opcional)</small></div></div>
+ <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+ <div class="ans">${ans}</div>
+ <div class="q"><h4>Quer comentar?</h4><div class="qc">${chips}</div><textarea id="cm" placeholder="Conte o que achou..."></textarea></div><button class="send" onclick="enviar()">Enviar avaliação</button>`}
 async function enviar(){
- const row={prato_id:'smash',comeu_bem:A.comeu_bem==='sim',serviu:A.serviu==='sim',dividir:A.dividir==='sim',comentario:$('#cm').value||null,simulado:false};
+ const ch=[...document.querySelectorAll('.qc .on')].map(x=>x.textContent).join('. '),tx=$('#cm').value.trim();
+ const row={prato_id:'smash',comeu_bem:A.comeu_bem==='sim',serviu:A.serviu==='sim',dividir:A.dividir==='sim',comentario:[ch,tx].filter(Boolean).join('. ')||null,simulado:false};
  const st=await salvar(row);
  $('#ratebox').innerHTML=`<div class="done">${WINK}<h2>Deu match!</h2><p style="color:var(--mut);font-size:13px">Obrigada pela avaliação. Ela ajuda o restaurante a ajustar a porção.</p></div>
  <div class="sum"><b>O que vai para a automação (${st}):</b><pre style="white-space:pre-wrap;font-size:11px;margin:6px 0 0">${JSON.stringify(row,null,1)}</pre><br>Toda semana, o fluxo agrupa as respostas, a IA resume os padrões e sugere o novo "serve X pessoas" do prato.</div>
