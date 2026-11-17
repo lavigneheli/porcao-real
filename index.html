@@ -2,9 +2,9 @@
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 <title>Porção Real | protótipo</title>
 <style>
-:root{--red:#d9202e;--ink:#1d1b1a;--mut:#7a726d;--bg:#faf6f1;--card:#fff;--ok:#1f9d55}
+:root{--red:#f43f5e;--ink:#14110f;--mut:#756c66;--bg:#fff8f1;--card:#fff;--ok:#16a34a}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#e9e2da;font-family:'Segoe UI',system-ui,sans-serif;color:var(--ink);display:flex;justify-content:center;padding:18px}
+body{margin:0;background:#fff8f1;font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;color:var(--ink)}
 .phone{width:390px;height:790px;background:var(--bg);border-radius:34px;border:8px solid #1d1b1a;position:relative;overflow:hidden;display:flex;flex-direction:column}
 header{padding:16px 18px 8px}header small{color:var(--mut)}header h1{margin:2px 0 0;font-size:20px}
 .tabs{display:flex;margin:0 18px 8px;background:#efe7de;border-radius:12px;padding:3px}
@@ -39,7 +39,7 @@ header{padding:16px 18px 8px}header small{color:var(--mut)}header h1{margin:2px 
 .q{background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px #0001}
 .q h4{margin:0 0 10px;font-size:14px}.opts{display:flex;gap:8px;flex-wrap:wrap}
 .opt{flex:1;min-width:70px;border:1.5px solid #e4dbd1;background:#fff;border-radius:12px;padding:10px 6px;font-size:13px;font-weight:600;text-align:center}
-.opt.sel{border-color:var(--red);background:#fdeaec;color:var(--red)}
+.opt.sel{border-color:var(--red);background:#ffe4e9;color:var(--red)}
 .opt.m.sel{border-color:var(--ok);background:#e7f6ee;color:var(--ok)}
 textarea{width:100%;border:1.5px solid #e4dbd1;border-radius:12px;padding:10px;font:inherit;font-size:13px;resize:none;height:64px}
 .send{width:100%;border:0;background:var(--red);color:#fff;font-weight:700;padding:13px;border-radius:14px;font-size:15px;margin-top:4px}
@@ -49,7 +49,7 @@ textarea{width:100%;border:1.5px solid #e4dbd1;border-radius:12px;padding:10px;f
 .swc{width:290px;height:350px;background:#fff;border-radius:26px;box-shadow:0 10px 30px #0002;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;cursor:grab;user-select:none;position:relative;touch-action:none}
 .swc h2{margin:14px 0 6px;font-size:22px}.swc p{margin:0;color:var(--mut);font-size:12px}
 .wink{width:120px;height:120px}.wink .face{animation:fc 2.4s infinite}.wink .eye2{transform-origin:67px 44px;animation:wk 2.4s infinite}
-@keyframes fc{0%,45%{fill:#d9202e}50%,95%{fill:#1f9d55}100%{fill:#d9202e}}
+@keyframes fc{0%,45%{fill:#f43f5e}50%,95%{fill:#16a34a}100%{fill:#f43f5e}}
 @keyframes wk{0%,40%,60%,90%,100%{transform:scaleY(1)}50%,55%{transform:scaleY(.15)}}
 .lbl{position:absolute;top:22px;font-size:20px;font-weight:800;border:3px solid;border-radius:10px;padding:2px 10px;opacity:0}
 .lbl.yes{left:18px;color:var(--ok);transform:rotate(-12deg)}.lbl.no{right:18px;color:var(--red);transform:rotate(12deg)}
@@ -58,7 +58,86 @@ textarea{width:100%;border:1.5px solid #e4dbd1;border-radius:12px;padding:10px;f
 .sb.yes{color:var(--ok)}.sb.no{color:var(--red)}.done .wink{width:90px;height:90px}
 .sum{background:#fff;border-radius:16px;padding:12px;margin-top:14px;font-size:12px;color:var(--mut)}
 .sum b{color:var(--ink)}
+
+/* ===== apresentação ===== */
+body{background:radial-gradient(900px 500px at 8% -5%,#ffe1d6 0,transparent 60%),radial-gradient(800px 500px at 100% 10%,#ffd9e2 0,transparent 55%),#fff8f1;min-height:100vh}
+.wrap{max-width:1200px;margin:0 auto;display:block;padding:28px 18px 40px}
+.pres{display:block;text-align:left}
+.pres .tag{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid #f1dfd3;border-radius:99px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--mut)}
+.pres .tag i{width:8px;height:8px;border-radius:50%;background:var(--ok);display:inline-block}
+.pres h1{font-size:clamp(44px,6vw,76px);line-height:1;margin:18px 0 16px;letter-spacing:-.03em;font-weight:800}
+.pres h1 span{background:linear-gradient(100deg,#f43f5e,#fb923c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:19px;line-height:1.55;color:#4a413b;max-width:560px;margin:0 0 22px}
+.try{display:flex;gap:10px;align-items:center;background:#14110f;color:#fff;border-radius:16px;padding:14px 18px;max-width:560px;font-size:14px;line-height:1.45}
+.try b{color:#fdba74}
+.sec{margin-top:44px}
+.sec h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 14px;font-weight:700}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{background:#fff;border:1px solid #f3e6da;border-radius:20px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,17,15,.25)}
+.step .n{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#f43f5e,#fb923c);color:#fff;font-weight:800;display:grid;place-items:center;margin-bottom:12px}
+.step h3{margin:0 0 6px;font-size:16px}.step p{margin:0;font-size:13.5px;line-height:1.5;color:#5d534c}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow .c{background:#fff;border:1px solid #f1dfd3;border-radius:14px;padding:10px 14px;font-weight:700;font-size:13.5px;box-shadow:0 6px 18px -12px rgba(20,17,15,.3)}
+.flow .c small{display:block;font-weight:500;color:var(--mut);font-size:11.5px;margin-top:2px}
+.flow .a{color:#d6c4b6;font-size:18px}
+.flow .c.ia{background:linear-gradient(135deg,#fff1f3,#fff6ea);border-color:#fbc9d3}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:#14110f;color:#fff;border-radius:18px;padding:16px}
+.stat b{display:block;font-size:30px;letter-spacing:-.02em;background:linear-gradient(100deg,#fda4af,#fdba74);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:12px;color:#c9beb6}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{background:#fff;border:1px solid #f1dfd3;border-radius:99px;padding:6px 12px;font-size:12.5px;font-weight:600}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid #f0e0d4;font-size:12.5px;color:var(--mut);line-height:1.6}
+.foot a{color:var(--red);font-weight:700;text-decoration:none}
+.stage{display:block;width:100%;max-width:406px;margin:36px auto 0;position:relative}
+.phone{box-shadow:0 50px 90px -30px rgba(244,63,94,.45),0 20px 40px -20px rgba(20,17,15,.4);border-color:#14110f}
+.stage .cap{text-align:center;font-size:12px;color:var(--mut);margin-top:14px}
+/* polimento do app */
+header h1{font-size:22px;letter-spacing:-.02em}
+.dish{border-radius:20px;box-shadow:0 10px 26px -16px rgba(20,17,15,.3);border:1px solid #f6ebe1}
+.tabs{background:#f6ebe1}.tabs button.on{box-shadow:0 2px 8px #14110f1a}
+.send{background:linear-gradient(135deg,#f43f5e,#fb923c);box-shadow:0 10px 22px -10px #f43f5e}
+.badge{border-radius:99px;padding:3px 9px}
+@media(max-width:980px){.steps{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.phone{width:100%;max-width:390px;margin:0 auto}}
+@media(min-width:981px){.wrap{display:flex;gap:64px;padding:56px 32px 40px;align-items:flex-start}.pres{flex:1 1 0;min-width:0}.stage{flex:0 0 406px;margin:0;position:sticky;top:28px}}
 </style></head><body>
+<div class="wrap">
+<main class="pres">
+ <span class="tag"><i></i>Projeto independente · inspirado em apps de delivery</span>
+ <h1>Porção <span>Real</span></h1>
+ <p class="lead">Veja o tamanho do prato antes de pedir. Diga se a porção serviu depois. O restaurante ajusta o cardápio com ajuda de IA, e uma pessoa sempre aprova.</p>
+ <div class="try">👆 <div><b>Teste o protótipo:</b> toque e segure um prato para vê-lo em escala. Depois abra <b>Match do pedido</b> e arraste para a direita (sim) ou para a esquerda (não).</div></div>
+
+ <div class="sec"><h2>Como funciona</h2>
+  <div class="steps">
+   <div class="step"><div class="n">1</div><h3>Ver</h3><p>Ao tocar e segurar a foto, o prato aparece em escala ao lado de um celular, uma mão ou uma moeda. Menos surpresa na entrega.</p></div>
+   <div class="step"><div class="n">2</div><h3>Avaliar</h3><p>Três perguntas, resposta por arrastar: comeu bem? serviu? dava pra dividir? O comentário fica por último e é opcional.</p></div>
+   <div class="step"><div class="n">3</div><h3>Ajustar</h3><p>Toda semana, uma automação resume as respostas e sugere o novo "serve X pessoas". O restaurante decide.</p></div>
+  </div></div>
+
+ <div class="sec"><h2>Automação semanal</h2>
+  <div class="flow">
+   <div class="c">App<small>avaliações</small></div><span class="a">→</span>
+   <div class="c">Supabase<small>banco + RLS</small></div><span class="a">→</span>
+   <div class="c">Make<small>agenda e orquestra</small></div><span class="a">→</span>
+   <div class="c ia">Gemini<small>resumo + sugestão</small></div><span class="a">→</span>
+   <div class="c">Supabase<small>sugestão pendente</small></div><span class="a">→</span>
+   <div class="c">E-mail<small>resumo do restaurante</small></div>
+  </div></div>
+
+ <div class="sec"><h2>Em números (dados simulados)</h2>
+  <div class="stats">
+   <div class="stat"><b>4</b><span>pratos modelados</span></div>
+   <div class="stat"><b>200</b><span>avaliações simuladas</span></div>
+   <div class="stat"><b>3</b><span>perguntas por pedido</span></div>
+   <div class="stat"><b>1</b><span>automação semanal</span></div>
+  </div></div>
+
+ <div class="sec"><h2>Tecnologias</h2>
+  <div class="chips"><span>HTML + JavaScript</span><span>Supabase (RLS)</span><span>Vercel</span><span>Make</span><span>Gemini</span><span>Prompt com saída em JSON</span></div></div>
+
+ <div class="foot"><b>Helen Lavigne Almeida Martins</b> · estudante de Medicina e AI Builder<br>Código: <a href="https://github.com/lavigneheli/porcao-real">github.com/lavigneheli/porcao-real</a><br>Pratos, medidas e avaliações são fictícios. Projeto independente, sem vínculo com o iFood.</div>
+</main>
+<div class="stage">
 <div class="phone">
  <header><small>Brasa &amp; Pão (restaurante fictício)</small><h1>Cardápio</h1></header>
  <div class="tabs"><button class="on" data-t="menu">Cardápio</button><button data-t="rate">Match do pedido</button></div>
@@ -75,6 +154,9 @@ textarea{width:100%;border:1.5px solid #e4dbd1;border-radius:12px;padding:10px;f
   <div id="stage"><div id="reflabel"></div><div id="scale"></div><div id="refobj" class="obj"></div><div id="dishwrap" class="obj"></div></div>
   <div class="dim" id="pd"></div><div class="pm" id="pp"></div>
  </div></div>
+</div>
+<div class="cap">Protótipo interativo · funciona no celular e no computador</div>
+</div>
 </div>
 
 <script>
