@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Helen Lavigne · AI Builder · Portfólio</title>
+<meta name="description" content="Portfólio de Helen Lavigne Almeida Martins: estudante de Medicina e AI Builder. 5 aplicações próprias no ar, com IA generativa, Supabase e automações no Make.">
+<style>
+:root{--red:#ea1d2c;--ink:#16161d;--mute:#6b6f7e;--line:#ececf2;--bg:#fafafc;--soft:#fff1f2}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:5;background:rgba(250,250,252,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+nav b{font-weight:800;letter-spacing:-.01em}
+nav div a{margin-left:20px;text-decoration:none;font-size:14px;font-weight:600;color:var(--mute)}
+nav div a:hover{color:var(--red)}
+.hero{padding:76px 0 40px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;right:-120px;top:-80px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,#ffd9dc 0,#ffe9ea 45%,transparent 70%);z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.tag{display:inline-block;background:var(--soft);color:var(--red);font-weight:700;font-size:13px;padding:6px 12px;border-radius:99px;margin-bottom:18px}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.05;letter-spacing:-.03em;font-weight:800;max-width:780px}
+h1 em{font-style:normal;color:var(--red)}
+.lead{margin-top:18px;font-size:18px;color:#3b3e4d;max-width:660px}
+.cta{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:15px;padding:13px 20px;border-radius:12px;border:2px solid var(--ink);transition:.2s}
+.btn.p{background:var(--red);border-color:var(--red);color:#fff}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.stat b{display:block;font-size:30px;letter-spacing:-.02em;color:var(--red)}
+.stat span{font-size:13px;color:var(--mute)}
+section{padding:54px 0}
+h2{font-size:28px;letter-spacing:-.02em;font-weight:800;margin-bottom:6px}
+.sub{color:var(--mute);margin-bottom:26px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;grid-template-columns:1.3fr 1fr;gap:26px;box-shadow:0 12px 40px rgba(234,29,44,.07)}
+.feat h3{font-size:24px;letter-spacing:-.02em}
+.feat .k{font-size:12px;font-weight:800;color:var(--red);letter-spacing:.08em;margin-bottom:8px}
+.feat p{margin:10px 0;color:#3b3e4d}
+.chain{display:flex;flex-direction:column;gap:8px;justify-content:center}
+.chain div{background:var(--soft);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600}
+.chain div:before{content:attr(data-n);display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;text-align:center;font-size:12px;line-height:22px;margin-right:10px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.08)}
+.card h3{font-size:19px;letter-spacing:-.01em}
+.card .m{font-size:12.5px;color:var(--mute);margin:2px 0 8px}
+.card p{font-size:14.5px;color:#3b3e4d}
+.card ul{padding-left:18px;margin:8px 0;font-size:14px;color:#3b3e4d}
+.links{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.links a{font-size:13px;font-weight:700;text-decoration:none;color:var(--red);background:var(--soft);padding:6px 11px;border-radius:9px}
+.links a:hover{background:var(--red);color:#fff}
+.note{font-size:12.5px;color:var(--mute);margin-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+footer{padding:44px 0 60px;border-top:1px solid var(--line);background:#fff;text-align:center}
+footer p{color:var(--mute);font-size:14px;margin-top:10px}
+.fade{opacity:0;transform:translateY(14px);transition:.6s}
+.fade.in{opacity:1;transform:none}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.feat,.grid,.two{grid-template-columns:1fr}nav div a:nth-child(n+3){display:none}}
+</style></head><body>
+<nav><div class="wrap"><b>Helen Lavigne</b><div><a href="#destaque">Destaque</a><a href="#projetos">Projetos</a><a href="#skills">Skills</a><a href="#contato">Contato</a></div></div></nav>
+
+<header class="hero"><div class="wrap">
+<span class="tag">AI Builder · Estudante de Medicina</span>
+<h1>Construo produtos com <em>IA generativa</em>, do problema ao ar.</h1>
+<p class="lead">Helen Lavigne Almeida Martins. Cinco aplicações próprias publicadas na web, com Supabase, Vercel e automações com Gemini e Claude. Sei o que pedir à IA, como validar a resposta e como transformar o resultado em produto.</p>
+<div class="cta"><a class="btn p" href="https://porcao-real.vercel.app/">Ver o Porção Real</a><a class="btn" href="https://github.com/lavigneheli">GitHub</a><a class="btn" href="https://www.linkedin.com/in/helenlavigne">LinkedIn</a></div>
+<div class="stats">
+<div class="stat"><b>5</b><span>aplicações próprias no ar</span></div>
+<div class="stat"><b>1</b><span>automação semanal com Gemini no Make</span></div>
+<div class="stat"><b>200</b><span>avaliações simuladas no Porção Real</span></div>
+<div class="stat"><b>AIF-C01</b><span>AWS Certified AI Practitioner</span></div>
+</div></div></header>
+
+<section id="destaque"><div class="wrap fade">
+<h2>Projeto em destaque</h2><p class="sub">Feito pensando no iFood: o prato mostrado ao cliente e a porção que chega são a mesma coisa?</p>
+<div class="feat">
+<div><div class="k">PORÇÃO REAL · 2026</div><h3>Prato em escala real e avaliação de porção</h3>
+<p>A foto de um prato não mostra o tamanho real, e a nota por estrelas não diz se a porção serviu. No protótipo, tocar e segurar a foto mostra o prato em escala ao lado de um objeto conhecido, e o cliente avalia por arrastar sim ou não: comeu bem? serviu? dava pra dividir?</p>
+<p>Toda semana uma automação transforma as respostas em resumo, reclamações mais citadas, sugestão de novo "serve X pessoas" e estratégia de marketplace. <b>O restaurante recebe por e-mail e aprova: nada muda no cardápio sem decisão humana.</b></p>
+<div class="links"><a href="https://porcao-real.vercel.app/">Protótipo</a><a href="https://porcao-real.vercel.app/relatorio.html">Relatório da loja</a><a href="https://github.com/lavigneheli/porcao-real">Código</a></div>
+<p class="note">Projeto independente, sem vínculo com o iFood. Todos os dados são fictícios (simulados).</p></div>
+<div class="chain"><div data-n="1">Supabase: resumo semanal por view</div><div data-n="2">Make: um prato por vez</div><div data-n="3">Gemini: resumo, problemas, sugestão (JSON)</div><div data-n="4">Supabase: grava como "pendente"</div><div data-n="5">Gmail: e-mail pronto para o restaurante</div></div>
+</div></div></section>
+
+<section id="projetos"><div class="wrap fade">
+<h2>Outros projetos</h2><p class="sub">Todos construídos com IA e publicados.</p>
+<div class="grid">
+<div class="card"><h3>Smart Heat Map</h3><div class="m">Vercel · Supabase Auth</div><p>Transforma a prova em mapa de calor por tema e guia a jornada de estudo.</p><ul><li>Classificação por cores que redistribui o tempo (23 temas)</li><li>Prompts para RAG com fontes próprias e análise de erros que realimenta o mapa</li><li>Gamificação com missões e insígnias</li></ul><div class="links"><a href="https://smart-heat-map.vercel.app/">Abrir</a><a href="https://github.com/lavigneheli/smart-heat-map">Código</a></div><p class="note">Acesso de demonstração na própria tela de login.</p></div>
+<div class="card"><h3>Medical Brain</h3><div class="m">Node.js · JavaScript · SQLite</div><p>Painel de estudo: rotina que se autorregula por horário e energia, ciclo mensal, editais de residência e plantões.</p><ul><li>Motor de aprovação por pontuação de 15 editais</li><li>API própria, backups e sincronização de estado</li></ul><div class="links"><a href="https://medical-brain-demo.vercel.app/">Demo</a><a href="https://github.com/lavigneheli/medical-brain-demo">Código</a></div><p class="note">Demonstração com dados fictícios.</p></div>
+<div class="card"><h3>MyScrum</h3><div class="m">Vercel · multiusuário</div><p>Planos, rotina e mapa dos sonhos em sprint semanal, com Scrum e Kanban (limite de WIP).</p><ul><li>Uso real: 8 semanas, 120 pontos concluídos</li><li>8 de 12 planos dentro do combinado (67%)</li></ul><div class="links"><a href="https://scrummy-alpha.vercel.app/">Abrir</a></div></div>
+<div class="card"><h3>Depois Daquela Planilha</h3><div class="m">Vercel · Supabase</div><p>Controle financeiro pessoal com 9 módulos.</p><ul><li>Importação de CSV com categorização automática</li><li>Score financeiro de 0 a 100</li><li>Regressão linear com intervalo de confiança para projetar 3 meses</li></ul><div class="links"><a href="https://depois-daquela-planilha.vercel.app/">Abrir</a></div></div>
+</div></div></section>
+
+<section id="skills"><div class="wrap fade two">
+<div><h2>O que eu uso</h2><p class="sub">Ferramentas e práticas.</p><div class="chips"><span>Claude · Claude Code</span><span>Gemini</span><span>Prompt engineering</span><span>Agentes de IA</span><span>RAG</span><span>Make</span><span>Supabase · RLS</span><span>API REST</span><span>Vercel</span><span>Node.js</span><span>Cursor · v0 · Bolt · Replit</span><span>Análise de dados com IA</span><span>IA responsável</span></div></div>
+<div><h2>Pesquisa e formação</h2><p class="sub">Medicina como base de raciocínio.</p><div class="chips"><span>Medicina · Afya Garanhuns (2025–2031.1)</span><span>Iniciação científica (PIVIC): estudo in silico</span><span>Raciocínio clínico</span><span>Português nativo · Inglês intermediário</span></div></div>
+</div></section>
+
+<footer id="contato"><div class="wrap fade"><h2>Vamos conversar?</h2>
+<div class="cta" style="justify-content:center"><a class="btn p" href="mailto:lavignehelen2@gmail.com">lavignehelen2@gmail.com</a><a class="btn" href="https://www.linkedin.com/in/helenlavigne">LinkedIn</a><a class="btn" href="https://github.com/lavigneheli">GitHub</a></div>
+<p>© 2026 Helen Lavigne Almeida Martins · Garanhuns, PE</p></div></footer>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
+</body></html>
